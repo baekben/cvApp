@@ -1,34 +1,99 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class Experience extends Component{
+class Experience extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			company: '',
+			position: '',
+			tasks: '',
+			startDate: '',
+			endDate: '',
+		};
+	}
+	handleChange = (e) => {
+		this.setState({
+			[e.target.id]: e.target.value,
+		});
+		console.log(this.state);
+	};
 
-  constructor(props){
-    super(props);
-    this.state ={
-      company: '',
-      position: '',
-      task: '',
-      tasks:[],
-      startDate: '',
-      endDate: '',
-    }
-  }
-  render(){
-        const { company,position,task,startDate,endDate } = this.state;
+	// handleSubmit = (e) => {
+	// 	e.preventDefault();
+	// };
 
-    return(
-    <div>
-      <h2><u>Experience</u></h2>
-    <input type="text" id="company" placeholder='Company Name' value={company} className="form-control" />
-    <input type='text' id='position' placeholder='Position'value={position}className='form-control'/>
-    <div className='form-tasks'>
-        <input type="text" id="task" placeholder='Task' value={task} className='form-control'/>
-        <button type='submit'className="btn btn-primary">Add Task</button>
-    </div>
-    <label><h5>Time Worked: </h5></label>
-    <input type='text' id='startDate' placeholder='Starting Date' value={startDate} className='form-control'/>
-    <input type='text' id='endDate' placeholder='Date Ended' value={endDate} className='form-control'/>
-    </div>)}  
+	render() {
+		const { company, position, tasks, startDate, endDate } = this.state;
+
+		return (
+			<div>
+				<h2>
+					<u>Experience</u>
+				</h2>
+				<form>
+					<div className="form-group">
+						<input
+							type="text"
+							id="company"
+							onChange={this.handleChange}
+							placeholder="Company Name"
+							value={company}
+							className="form-control"
+						/>
+					</div>
+					<div className="form-group">
+						<input
+							type="text"
+							id="position"
+							onChange={this.handleChange}
+							placeholder="Position"
+							value={position}
+							className="form-control"
+						/>
+					</div>
+					<div className="form-group">
+						<input
+							type="text"
+							id="task"
+							onChange={this.handleChange}
+							placeholder="Task/Description of Job (data management, marketing, etc.)"
+							value={tasks}
+							className="form-control"
+						/>
+					</div>
+					<label>
+						<h5>Time Worked: </h5>
+					</label>
+					<div className="form-group">
+						<input
+							type="text"
+							id="startDate"
+							onChange={this.handleChange}
+							placeholder="Starting Date"
+							value={startDate}
+							className="form-control"
+						/>
+					</div>
+					<div className="form-group">
+						<input
+							type="text"
+							id="endDate"
+							onChange={this.handleChange}
+							placeholder="Date Ended"
+							value={endDate}
+							className="form-control"
+						/>
+					</div>
+					<div>
+						<button type="submit" className="btn btn-primary">
+							Submit
+						</button>
+						<button className="btn btn-primary">Edit</button>
+					</div>
+				</form>
+			</div>
+		);
+	}
 }
 
 export default Experience;
