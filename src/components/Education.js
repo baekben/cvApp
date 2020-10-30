@@ -13,7 +13,7 @@ class Education extends Component {
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
-		console.log('Education: ' + this.state);
+		console.log(this.state);
 	};
 
 	render() {
@@ -30,7 +30,7 @@ class Education extends Component {
 							type="text"
 							placeholder="School name"
 							onChange={this.handleChange}
-							id="schooName"
+							id="school"
 							value={school}
 							className="form-control"
 						/>

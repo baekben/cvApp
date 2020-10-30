@@ -24,7 +24,6 @@ class GeneralInfo extends Component {
 					<u>General Info</u>
 				</h2>
 				<form>
-					{' '}
 					<div className="form-group">
 						<input
 							type="text"

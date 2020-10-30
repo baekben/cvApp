@@ -54,7 +54,7 @@ class Experience extends Component {
 					<div className="form-group">
 						<input
 							type="text"
-							id="task"
+							id="tasks"
 							onChange={this.handleChange}
 							placeholder="Task/Description of Job (data management, marketing, etc.)"
 							value={tasks}
