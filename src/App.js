@@ -109,6 +109,7 @@ class App extends Component {
 				tasks={tasks}
 				startDate={startDate}
 				endDate={endDate}
+				displayCV={this.displayCV}
 			/>
 		);
 	}

@@ -17,6 +17,7 @@ class Output extends Component {
 			tasks,
 			startDate,
 			endDate,
+			displayCV,
 		} = this.props;
 		console.log('This is the CV');
 		return (
@@ -30,6 +31,11 @@ class Output extends Component {
 					startDate={startDate}
 					endDate={endDate}
 				/>
+				<div>
+					<button type="submit" onClick={displayCV}>
+						Edit
+					</button>
+				</div>
 			</div>
 		);
 	}

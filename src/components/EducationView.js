@@ -5,9 +5,9 @@ export default class EducationView extends Component {
 		const { school, degree, gradDate } = this.props;
 		return (
 			<div>
-				<h3>{school}</h3>
-				<h3>{degree}</h3>
-				<h4>{gradDate}</h4>
+				<h3>School: {school}</h3>
+				<h3>Degree: {degree}</h3>
+				<h4>Grad Date: {gradDate}</h4>
 			</div>
 		);
 	}

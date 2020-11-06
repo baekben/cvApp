@@ -5,9 +5,9 @@ export default class GeneralInforView extends Component {
 		const { fullName, email, phone } = this.props;
 		return (
 			<div>
-				<h2>{fullName}</h2>
-				<h4>{email}</h4>
-				<h4>{phone}</h4>
+				<h2>Name: {fullName}</h2>
+				<h4>Email: {email}</h4>
+				<h4>Phone: {phone}</h4>
 			</div>
 		);
 	}
