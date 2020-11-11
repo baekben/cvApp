@@ -21,7 +21,7 @@ class Output extends Component {
 		} = this.props;
 		console.log('This is the CV');
 		return (
-			<div>
+			<div class="container">
 				<GeneralInforView fullName={fullName} email={email} phone={phone} />
 				<EducationView school={school} degree={degree} gradDate={gradDate} />
 				<ExperienceView

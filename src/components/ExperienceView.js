@@ -6,10 +6,12 @@ export default class EducationView extends Component {
 		return (
 			<div>
 				<h3>Company: {company}</h3>
-				<h2>Position: {position}</h2>
-				<h2>Tasks: {tasks}</h2>
-				<h2>Start Date: {startDate}</h2>
-				<h2>End Date: {endDate}</h2>
+				<h4>Position: {position}</h4>
+				<h4>Tasks: {tasks}</h4>
+				<div class="row">
+					<p class="col-xs-6 col-sm-4">Start Date: {startDate}</p>
+					<p class="col-xs-6 col-sm-4">End Date: {endDate}</p>
+				</div>
 			</div>
 		);
 	}

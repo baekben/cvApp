@@ -6,8 +6,10 @@ export default class EducationView extends Component {
 		return (
 			<div>
 				<h3>School: {school}</h3>
-				<h3>Degree: {degree}</h3>
-				<h4>Grad Date: {gradDate}</h4>
+				<div class="row border-bottom border-dark">
+					<h4 class="col-md-4 col-xs-6 ">Degree: {degree}</h4>
+					<p class="col-md-4 col-xs-6">Grad Date: {gradDate}</p>
+				</div>
 			</div>
 		);
 	}
