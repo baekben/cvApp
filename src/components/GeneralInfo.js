@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 
 class GeneralInfo extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			fullName: '',
+			email: '',
+			phone: '',
+		};
+	}
 	render() {
 		const { fullName, email, phone, handleChange } = this.props;
 
 		return (
-			<div>
-				<h2>
-					<u>General Info</u>
-				</h2>
+			<div color="bg-secondary">
 				<input
 					type="text"
 					id="fullName"

@@ -1,40 +1,49 @@
 import React, { Component } from 'react';
 
 class Education extends Component {
-	render() {
-		const { school, degree, gradDate, handleChange } = this.props;
+	constructor(props) {
+		super(props);
 
+		this.state = {
+			school: '',
+			degree: '',
+			gradDate: '',
+		};
+		this.handleChange = this.handleChange.bind(this);
+	}
+	handleChange = (e) => {
+		this.setState({
+			[e.target.id]: e.target.value,
+		});
+	};
+	render() {
 		return (
 			<div>
-				<h2>
-					<u>Education</u>
-				</h2>
-					<input
-						type="text"
-						placeholder="School name"
-						onChange={handleChange}
-						id="school"
-						value={school}
-						className="form-control"
-					/>
-					<input
-						type="text"
-						placeholder="Degree/Area of Study"
-						onChange={handleChange}
-						id="degree"
-						value={degree}
-						className="form-control"
-					/>
+				<input
+					type="text"
+					placeholder="School name"
+					value={this.state.school}
+					onChange={this.handleChange}
+					id="school"
+					className="form-control"
+				/>
+				<input
+					type="text"
+					placeholder="Degree/Area of Study"
+					value={this.state.degree}
+					onChange={this.handleChange}
+					id="degree"
+					className="form-control"
+				/>
 
-					<input
-						type="text"
-						placeholder="Graduation Date"
-						onChange={handleChange}
-						id="gradDate"
-						value={gradDate}
-						className="form-control"
-					/>
-
+				<input
+					type="text"
+					placeholder="Graduation Date"
+					value={this.state.gradDate}
+					onChange={this.handleChange}
+					id="gradDate"
+					className="form-control"
+				/>
 			</div>
 		);
 	}

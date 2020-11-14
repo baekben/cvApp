@@ -6,9 +6,6 @@ class Experience extends Component {
 
 		return (
 			<div>
-				<h2>
-					<u>Experience</u>
-				</h2>
 				<input
 					type="text"
 					id="company"
