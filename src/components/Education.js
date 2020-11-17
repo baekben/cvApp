@@ -1,37 +1,27 @@
 import React, { Component } from 'react';
 
 class Education extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			school: '',
-			degree: '',
-			gradDate: '',
-		};
-		this.handleChange = this.handleChange.bind(this);
-	}
-	handleChange = (e) => {
-		this.setState({
-			[e.target.id]: e.target.value,
-		});
-	};
 	render() {
+		const { handleChange, school, degree, gradDate, eduSubmit } = this.props;
+
 		return (
-			<div>
+			<div className="form-group">
+				<h2>
+					<u>School</u>
+				</h2>
 				<input
 					type="text"
 					placeholder="School name"
-					value={this.state.school}
-					onChange={this.handleChange}
+					value={school}
+					onChange={handleChange}
 					id="school"
 					className="form-control"
 				/>
 				<input
 					type="text"
 					placeholder="Degree/Area of Study"
-					value={this.state.degree}
-					onChange={this.handleChange}
+					value={degree}
+					onChange={handleChange}
 					id="degree"
 					className="form-control"
 				/>
@@ -39,11 +29,16 @@ class Education extends Component {
 				<input
 					type="text"
 					placeholder="Graduation Date"
-					value={this.state.gradDate}
-					onChange={this.handleChange}
+					value={gradDate}
+					onChange={handleChange}
 					id="gradDate"
 					className="form-control"
 				/>
+				<div>
+					<button className="btn btn-secondary" type="submit" id="schoolSave" onClick={eduSubmit}>
+						Add School (Optional)
+					</button>
+				</div>
 			</div>
 		);
 	}

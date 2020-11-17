@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 
 class GeneralInfo extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			fullName: '',
-			email: '',
-			phone: '',
-		};
-	}
 	render() {
 		const { fullName, email, phone, handleChange } = this.props;
-
 		return (
-			<div color="bg-secondary">
+			<div color="bg-secondary" className="form-group">
+				<h2>
+					<u>Education</u>
+				</h2>
 				<input
 					type="text"
 					id="fullName"
