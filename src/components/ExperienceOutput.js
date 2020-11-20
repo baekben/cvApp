@@ -13,26 +13,13 @@ export default class ExperienceOutput extends Component {
 			endDate: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
 	};
-	handleSubmit = (e) => {
-		e.preventDefault();
 
-		//add school
-		let job = {
-			company: this.state.company,
-			position: this.state.position,
-			tasks: this.state.tasks,
-			startDate: this.state.startDate,
-			endDate: this.state.endDate,
-		};
-		this.props.jobs(job);
-	};
 	render() {
 		const { company, position, tasks, startDate, endDate } = this.state;
 		const { completedForm } = this.props;
@@ -44,7 +31,6 @@ export default class ExperienceOutput extends Component {
 				startDate={startDate}
 				endDate={endDate}
 				handleChange={this.handleChange}
-				handleSubmit={this.handleSubmit}
 			/>
 		) : (
 			<ExperienceView

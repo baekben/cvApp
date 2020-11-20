@@ -11,7 +11,6 @@ export default class EducationOutput extends Component {
 			gradDate: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
-		// this.eduSubmit = this.eduSubmit.bind(this);
 	}
 	handleChange = (e) => {
 		this.setState({
@@ -19,16 +18,6 @@ export default class EducationOutput extends Component {
 		});
 	};
 
-	eduSubmit = (e) => {
-		e.preventDefault();
-		//add school
-		let education = {
-			school: this.state.school,
-			degree: this.state.degree,
-			gradDate: this.state.gradDate,
-		};
-		this.props.newEducation(education);
-	};
 	render() {
 		const { school, degree, gradDate } = this.state;
 		const { completedForm, number } = this.props;

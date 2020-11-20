@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 
 class Experience extends Component {
 	render() {
-		const { company, position, tasks, startDate, endDate, handleChange, handleSubmit } = this.props;
+		const { company, position, tasks, startDate, endDate, handleChange } = this.props;
 
 		return (
 			<div className="form-group">
-
 				<input
 					type="text"
 					id="company"
@@ -50,9 +49,6 @@ class Experience extends Component {
 					value={endDate}
 					className="form-control"
 				/>
-				<button className="btn btn-secondary" id="jobBtn" onClick={handleSubmit}>
-					Add Experience (optional)
-				</button>
 			</div>
 		);
 	}
