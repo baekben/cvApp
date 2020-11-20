@@ -6,11 +6,10 @@ class Experience extends Component {
 
 		return (
 			<div className="form-group">
-				<div>
-					<button className="btn btn-secondary" id="jobBtn" onClick={handleSubmit}>
-						Add Experience (optional)
-					</button>
-				</div>
+				<h2>
+					<u>Experience</u>
+				</h2>
+
 				<input
 					type="text"
 					id="company"
@@ -54,6 +53,9 @@ class Experience extends Component {
 					value={endDate}
 					className="form-control"
 				/>
+				<button className="btn btn-secondary" id="jobBtn" onClick={handleSubmit}>
+					Add Experience (optional)
+				</button>
 			</div>
 		);
 	}
