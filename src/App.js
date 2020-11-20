@@ -10,6 +10,7 @@ class App extends Component {
 			completedForm: true,
 			eduNum: 1,
 			jobNum: 1,
+			newEducation: [],
 			educations: [],
 			jobs: [],
 			buttonText: 'Submit',
@@ -17,6 +18,7 @@ class App extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.addEducation = this.addEducation.bind(this);
+		this.newEducation = this.newEducation.bind(this);
 		this.addJob = this.addJob.bind(this);
 	}
 
@@ -46,7 +48,7 @@ class App extends Component {
 			eduNum: this.state.eduNum + 1,
 			educations: this.state.educations.concat(education),
 		});
-		console.log(this.state.addEducation);
+		console.log(this.addEducation);
 	};
 
 	addJob = (job) => {
@@ -57,6 +59,17 @@ class App extends Component {
 		console.log(this.state.addJob);
 	};
 
+	newEducation = (education) => {
+		this.setState({
+			newEducation: this.state.newEducation.concat(education),
+		});
+	};
+
+	updateEducation = (e) => {
+		e.preventDefault();
+		this.addEducation(this.newEducation);
+	};
+
 	render() {
 		const educations = [];
 		for (let i = 0; i < this.state.eduNum; i++) {
@@ -65,7 +78,7 @@ class App extends Component {
 					key={i}
 					number={i}
 					completedForm={this.state.completedForm}
-					educations={this.addEducation}
+					newEducation={this.newEducation}
 				/>
 			);
 		}
@@ -91,7 +104,16 @@ class App extends Component {
 							completedForm={this.state.completedForm}
 							onChange={this.handleChange}
 						/>
+						<h2>
+							<u>School</u>
+						</h2>
+						<button type="submit" className="btn btn-secondary" onClick={this.updateEducation}>
+							Add Education
+						</button>
 						{educations}
+						<h2>
+							<u>Experience</u>
+						</h2>
 
 						{jobs}
 						<div>

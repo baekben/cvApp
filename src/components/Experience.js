@@ -6,9 +6,6 @@ class Experience extends Component {
 
 		return (
 			<div className="form-group">
-				<h2>
-					<u>Experience</u>
-				</h2>
 
 				<input
 					type="text"

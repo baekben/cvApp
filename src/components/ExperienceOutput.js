@@ -22,17 +22,16 @@ export default class ExperienceOutput extends Component {
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
-		if (e.target.id === 'jobBtn') {
-			//add school
-			let job = {
-				company: this.state.company,
-				position: this.state.position,
-				tasks: this.state.tasks,
-				startDate: this.state.startDate,
-				endDate: this.state.endDate,
-			};
-			this.props.jobs(job);
-		}
+
+		//add school
+		let job = {
+			company: this.state.company,
+			position: this.state.position,
+			tasks: this.state.tasks,
+			startDate: this.state.startDate,
+			endDate: this.state.endDate,
+		};
+		this.props.jobs(job);
 	};
 	render() {
 		const { company, position, tasks, startDate, endDate } = this.state;

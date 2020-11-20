@@ -11,39 +11,53 @@ export default class EducationOutput extends Component {
 			gradDate: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
-		this.eduSubmit = this.eduSubmit.bind(this);
+		// this.eduSubmit = this.eduSubmit.bind(this);
 	}
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
 	};
+
 	eduSubmit = (e) => {
 		e.preventDefault();
-		if (e.target.id === 'schoolSave') {
-			//add school
-			let education = {
-				school: this.state.school,
-				degree: this.state.degree,
-				gradDate: this.state.gradDate,
-			};
-			this.props.educations(education);
-		}
+		//add school
+		let education = {
+			school: this.state.school,
+			degree: this.state.degree,
+			gradDate: this.state.gradDate,
+		};
+		this.props.newEducation(education);
 	};
 	render() {
 		const { school, degree, gradDate } = this.state;
-		const { completedForm } = this.props;
+		const { completedForm, number } = this.props;
 
-		return completedForm ? (
-			<Education
-				school={school}
-				degree={degree}
-				gradDate={gradDate}
-				handleChange={this.handleChange}
-				eduSubmit={this.eduSubmit}
-			/>
-		) : (
-			<EducationView school={school} degree={degree} gradDate={gradDate} />
+		return (
+			<div>
+				<div>
+					{completedForm ? (
+						<Education
+							number={number}
+							school={school}
+							degree={degree}
+							gradDate={gradDate}
+							handleChange={this.handleChange}
+						/>
+					) : (
+						<EducationView school={school} degree={degree} gradDate={gradDate} />
+					)}
+				</div>
+				<div>
+					{/* <button
+						className="btn btn-secondary"
+						type="submit"
+						id="schoolSave"
+						onClick={this.eduSubmit}>
+						Add School (Optional)
+					</button> */}
+				</div>
+			</div>
 		);
 	}
 }
