@@ -8,15 +8,12 @@ class App extends Component {
 		super(props);
 		this.state = {
 			completedForm: true,
-			eduNum: 1,
 			jobNum: 1,
-			educations: [],
 			jobs: [],
 			buttonText: 'Submit',
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.addEducation = this.addEducation.bind(this);
 		this.addJob = this.addJob.bind(this);
 	}
 
@@ -41,44 +38,18 @@ class App extends Component {
 		});
 	};
 
-	addEducation = (education) => {
-		this.setState({
-			eduNum: this.state.eduNum + 1,
-			educations: this.state.educations.concat(education),
-		});
-		console.log(this.state.addEducation);
-	};
-
 	addJob = (job) => {
 		this.setState({
 			jobNum: this.state.jobNum + 1,
 			jobs: this.state.jobs.concat(job),
 		});
-		console.log(this.state.addJob);
+		console.log('Job/experience Added');
 	};
 
 	render() {
-		const educations = [];
-		for (let i = 0; i < this.state.eduNum; i++) {
-			educations.push(
-				<EducationOutput
-					key={i}
-					number={i}
-					completedForm={this.state.completedForm}
-					educations={this.addEducation}
-				/>
-			);
-		}
 		const jobs = [];
 		for (let i = 0; i < this.state.jobNum; i++) {
-			jobs.push(
-				<ExperienceOutput
-					key={i}
-					number={i}
-					completedForm={this.state.completedForm}
-					jobs={this.addJob}
-				/>
-			);
+			jobs.push();
 		}
 		return (
 			<div className="col-6 mx-auto mt-5">
@@ -87,13 +58,21 @@ class App extends Component {
 				</header>
 				<div>
 					<form>
+						<h2>
+							<u>Education</u>
+						</h2>
 						<GeneralInfoOutput
 							completedForm={this.state.completedForm}
 							onChange={this.handleChange}
 						/>
-						{educations}
-
-						{jobs}
+						<h2>
+							<u>Education</u>
+						</h2>
+						<EducationOutput completedForm={this.completedForm} />
+						<h2>
+							<u>Experience</u>
+						</h2>
+						<ExperienceOutput completedForm={this.completedForm} />
 						<div>
 							<button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
 								{this.state.buttonText}

@@ -5,9 +5,7 @@ class GeneralInfo extends Component {
 		const { fullName, email, phone, handleChange } = this.props;
 		return (
 			<div color="bg-secondary" className="form-group">
-				<h2>
-					<u>Education</u>
-				</h2>
+				
 				<input
 					type="text"
 					id="fullName"
