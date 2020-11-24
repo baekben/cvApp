@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 class GeneralInfo extends Component {
 	render() {
-		const { fullName, email, phone, handleChange } = this.props;
+		const { fullName, email, phone, handleChange, handleSubmit } = this.props;
 		return (
-			<form color="bg-secondary" className="form-group">
+			<form color="bg-secondary" className="form-group" onSubmit={handleSubmit}>
 				<h2>
 					<u>General Info</u>
 				</h2>

@@ -34,9 +34,6 @@ class Education extends Component {
 					id="gradDate"
 					className="form-control"
 				/>
-				<div>
-					<button type="submit">Submit</button>
-				</div>
 			</form>
 		);
 	}

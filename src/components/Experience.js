@@ -61,9 +61,6 @@ class Experience extends Component {
 					value={endDate}
 					className="form-control"
 				/>
-				<div>
-					<button type="submit">Submit</button>
-				</div>
 			</form>
 		);
 	}

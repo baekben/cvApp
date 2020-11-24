@@ -7,43 +7,18 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			completedForm: true,
 			eduNum: 1,
 			jobNum: 1,
 			newEducation: [],
 			educations: [],
 			newJob: [],
 			jobs: [],
-			buttonText: 'Submit',
 		};
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 		this.addEducation = this.addEducation.bind(this);
 		this.newEducation = this.newEducation.bind(this);
 		this.newJob = this.newJob.bind(this);
 		this.addJob = this.addJob.bind(this);
 	}
-
-	handleChange = (e) => {
-		this.setState({
-			[e.target.id]: e.target.value,
-		});
-	};
-
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.displayCV();
-		this.setState({
-			buttonText: 'Edit',
-		});
-	};
-
-	displayCV = () => {
-		const { completedForm } = this.state;
-		this.setState({
-			completedForm: !completedForm,
-		});
-	};
 
 	addEducation = (education) => {
 		this.setState({
@@ -55,7 +30,7 @@ class App extends Component {
 	addJob = (job) => {
 		this.setState({
 			jobNum: this.state.jobNum + 1,
-			jobs: this.state.jobs.concat(job),
+			jobs: [...this.state.jobs, job],
 		});
 	};
 
@@ -71,12 +46,11 @@ class App extends Component {
 
 	newJob = (job) => {
 		this.setState({
-			newJob: this.state.newJob.concat(job),
+			newJob: [...this.state.newJob, job],
 		});
 	};
 
-	updateJob = (e) => {
-		e.preventDefault();
+	updateJob = () => {
 		this.addJob(this.state.newJob);
 	};
 
@@ -104,20 +78,19 @@ class App extends Component {
 				</header>
 				<div>
 					<div>
-						<GeneralInfoOutput
-							completedForm={this.state.completedForm}
-							onChange={this.handleChange}
-						/>
+						<GeneralInfoOutput />
 						<h2>
 							<u>School</u>
 						</h2>
-						<button className="btn btn-secondary" onClick={this.updateEducation}>
+						<button className="btn btn-secondary" type="button" onClick={this.updateEducation}>
 							Add Education
 						</button>
-						{this.state.educations.map((i) => (
+						{this.state.educations.map((edu, i) => (
 							<EducationOutput
 								key={i}
 								number={i + 1}
+								edu={edu}
+								index={i}
 								newEducation={this.newEducation}
 								removeItem={this.removeItem}
 							/>
@@ -125,7 +98,7 @@ class App extends Component {
 						<h2>
 							<u>Experience</u>
 						</h2>
-						<button className="btn btn-secondary" id="jobBtn" onClick={this.updateJob}>
+						<button type="button" className="btn btn-secondary" onClick={this.updateJob}>
 							Add Experience (optional)
 						</button>
 						{this.state.jobs.map((i) => (
@@ -134,13 +107,9 @@ class App extends Component {
 								number={i + 1}
 								completedForm={this.state.completedForm}
 								jobs={this.newJob}
+								removeItem={this.removeItem}
 							/>
 						))}
-						<div>
-							<button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
-								{this.state.buttonText}
-							</button>
-						</div>
 					</div>
 				</div>
 			</div>

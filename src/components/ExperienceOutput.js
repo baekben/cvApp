@@ -14,6 +14,7 @@ export default class ExperienceOutput extends Component {
 			startDate: '',
 			endDate: '',
 			completedForm: true,
+			buttonText: 'Submit',
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +28,15 @@ export default class ExperienceOutput extends Component {
 		e.preventDefault();
 		this.props.newJob(this.state);
 		this.displayCV();
+		if (this.state.completedForm) {
+			this.setState({
+				buttonText: 'Edit',
+			});
+		} else {
+			this.setState({
+				buttonText: 'Submit',
+			});
+		}
 	};
 
 	displayCV = () => {
@@ -37,8 +47,7 @@ export default class ExperienceOutput extends Component {
 	};
 
 	deleteItem = (e) => {
-		console.log(e);
-		this.props.removeItem(e, 'job');
+		this.props.removeItem(e.target.id, 'job');
 	};
 
 	render() {
@@ -65,12 +74,18 @@ export default class ExperienceOutput extends Component {
 							tasks={tasks}
 							startDate={startDate}
 							endDate={endDate}
+							deleteItem={this.deleteItem}
 						/>
 					)}
 				</div>
-				<button type="button" onClick={() => this.deleteItem(number)}>
-					Delete
-				</button>
+				<div>
+					<button type="submit" className="btn btn-primary" onclick={this.handleSubmit}>
+						{this.state.buttonText}
+					</button>
+					<button type="button" id={number} onClick={this.deleteItem}>
+						Delete
+					</button>
+				</div>
 			</div>
 		);
 	}
