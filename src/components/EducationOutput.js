@@ -55,7 +55,6 @@ export default class EducationOutput extends Component {
 							gradDate={gradDate}
 							handleChange={this.handleChange}
 							handleSubmit={this.handleSubmit}
-							deleteItem={this.deleteItem}
 						/>
 					) : (
 						<EducationView school={school} degree={degree} gradDate={gradDate} />

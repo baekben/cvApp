@@ -83,29 +83,20 @@ class App extends Component {
 	removeItem = (index, type) => {
 		let tempList;
 		if (type === 'edu') {
-			console.log('remove item' + index);
+			console.log('remove edu ' + index);
 			tempList = this.state.educations;
+			tempList.splice(index, 1);
+			this.setState({ educations: tempList });
 		}
-		tempList.splice(index, 1);
-		this.setState({ educations: tempList });
-		console.log(this.state.educations);
+		if (type === 'job') {
+			console.log('remove job ' + index);
+			tempList = this.state.jobs;
+			tempList.splice(index, 1);
+			this.setState({ jobs: tempList });
+		}
 	};
 
 	render() {
-		const jobs = [];
-		for (let i = 0; i < this.state.jobNum; i++) {
-			jobs.push(
-				<ExperienceOutput
-					key={i}
-					number={i}
-					completedForm={this.state.completedForm}
-					jobs={this.newJob}
-				/>
-			);
-		}
-		console.log('edu current');
-		console.log(this.state.educations);
-
 		return (
 			<div className="col-6 mx-auto mt-5">
 				<header>
@@ -123,11 +114,10 @@ class App extends Component {
 						<button className="btn btn-secondary" onClick={this.updateEducation}>
 							Add Education
 						</button>
-						{this.state.educations.map((index) => (
+						{this.state.educations.map((i) => (
 							<EducationOutput
-								key={index}
-								number={index + 1}
-								index={index}
+								key={i}
+								number={i + 1}
 								newEducation={this.newEducation}
 								removeItem={this.removeItem}
 							/>
@@ -138,7 +128,14 @@ class App extends Component {
 						<button className="btn btn-secondary" id="jobBtn" onClick={this.updateJob}>
 							Add Experience (optional)
 						</button>
-						{jobs}
+						{this.state.jobs.map((i) => (
+							<ExperienceOutput
+								key={i}
+								number={i + 1}
+								completedForm={this.state.completedForm}
+								jobs={this.newJob}
+							/>
+						))}
 						<div>
 							<button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
 								{this.state.buttonText}
