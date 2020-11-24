@@ -48,9 +48,8 @@ class App extends Component {
 	addEducation = (education) => {
 		this.setState({
 			eduNum: this.state.eduNum + 1,
-			educations: this.state.educations.concat(education),
+			educations: [...this.state.educations, education],
 		});
-		console.log(this.addEducation);
 	};
 
 	addJob = (job) => {
@@ -58,18 +57,16 @@ class App extends Component {
 			jobNum: this.state.jobNum + 1,
 			jobs: this.state.jobs.concat(job),
 		});
-		console.log(this.state.addJob);
 	};
 
 	newEducation = (education) => {
 		this.setState({
-			newEducation: this.state.newEducation.concat(education),
+			newEducation: [...this.state.newEducation, education],
 		});
 	};
 
-	updateEducation = (e) => {
-		e.preventDefault();
-		this.addEducation(this.newEducation);
+	updateEducation = () => {
+		this.addEducation(this.state.newEducation);
 	};
 
 	newJob = (job) => {
@@ -80,21 +77,21 @@ class App extends Component {
 
 	updateJob = (e) => {
 		e.preventDefault();
-		this.addJob(this.newJob);
+		this.addJob(this.state.newJob);
+	};
+
+	removeItem = (index, type) => {
+		let tempList;
+		if (type === 'edu') {
+			console.log('remove item' + index);
+			tempList = this.state.educations;
+		}
+		tempList.splice(index, 1);
+		this.setState({ educations: tempList });
+		console.log(this.state.educations);
 	};
 
 	render() {
-		const educations = [];
-		for (let i = 0; i < this.state.eduNum; i++) {
-			educations.push(
-				<EducationOutput
-					key={i}
-					number={i}
-					completedForm={this.state.completedForm}
-					newEducation={this.newEducation}
-				/>
-			);
-		}
 		const jobs = [];
 		for (let i = 0; i < this.state.jobNum; i++) {
 			jobs.push(
@@ -106,13 +103,16 @@ class App extends Component {
 				/>
 			);
 		}
+		console.log('edu current');
+		console.log(this.state.educations);
+
 		return (
 			<div className="col-6 mx-auto mt-5">
 				<header>
 					<h1>CV/Resume Builder</h1>
 				</header>
 				<div>
-					<form>
+					<div>
 						<GeneralInfoOutput
 							completedForm={this.state.completedForm}
 							onChange={this.handleChange}
@@ -120,10 +120,18 @@ class App extends Component {
 						<h2>
 							<u>School</u>
 						</h2>
-						<button type="submit" className="btn btn-secondary" onClick={this.updateEducation}>
+						<button className="btn btn-secondary" onClick={this.updateEducation}>
 							Add Education
 						</button>
-						{educations}
+						{this.state.educations.map((index) => (
+							<EducationOutput
+								key={index}
+								number={index + 1}
+								index={index}
+								newEducation={this.newEducation}
+								removeItem={this.removeItem}
+							/>
+						))}
 						<h2>
 							<u>Experience</u>
 						</h2>
@@ -136,7 +144,7 @@ class App extends Component {
 								{this.state.buttonText}
 							</button>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		);

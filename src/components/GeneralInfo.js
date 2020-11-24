@@ -4,9 +4,9 @@ class GeneralInfo extends Component {
 	render() {
 		const { fullName, email, phone, handleChange } = this.props;
 		return (
-			<div color="bg-secondary" className="form-group">
+			<form color="bg-secondary" className="form-group">
 				<h2>
-					<u>Education</u>
+					<u>General Info</u>
 				</h2>
 				<input
 					type="text"
@@ -33,7 +33,7 @@ class GeneralInfo extends Component {
 					className="form-control"
 					pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 				/>
-			</div>
+			</form>
 		);
 	}
 }

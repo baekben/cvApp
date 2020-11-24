@@ -22,9 +22,10 @@ export default class ExperienceOutput extends Component {
 
 	render() {
 		const { company, position, tasks, startDate, endDate } = this.state;
-		const { completedForm } = this.props;
+		const { completedForm, number } = this.props;
 		return completedForm ? (
 			<Experience
+				number={number}
 				company={company}
 				position={position}
 				tasks={tasks}

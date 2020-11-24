@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 
 class Education extends Component {
 	render() {
-		const { handleChange, school, degree, gradDate } = this.props;
+		const { handleChange, school, degree, gradDate, number, handleSubmit } = this.props;
 
 		return (
-			<div className="form-group">
+			<form className="form-group" onSubmit={handleSubmit}>
+				<div className="row">
+					<h4 className=".col-md-3 .col-md-offset-3">Education #{number}</h4>
+				</div>
 				<input
 					type="text"
 					placeholder="School name"
@@ -31,7 +34,10 @@ class Education extends Component {
 					id="gradDate"
 					className="form-control"
 				/>
-			</div>
+				<div>
+					<button type="submit">Submit</button>
+				</div>
+			</form>
 		);
 	}
 }

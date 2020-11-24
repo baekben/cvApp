@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 
 class Experience extends Component {
 	render() {
-		const { company, position, tasks, startDate, endDate, handleChange } = this.props;
+		const { company, position, tasks, startDate, endDate, handleChange, number } = this.props;
 
 		return (
-			<div className="form-group">
+			<form className="form-group">
+				<div className="row">
+					<h4 className=".col-md-3 .col-md-offset-3">Job/Experience #{number}</h4>
+				</div>
 				<input
 					type="text"
 					id="company"
@@ -49,7 +52,7 @@ class Experience extends Component {
 					value={endDate}
 					className="form-control"
 				/>
-			</div>
+			</form>
 		);
 	}
 }
