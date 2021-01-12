@@ -1,92 +1,97 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Experience from './Experience';
 import ExperienceView from './ExperienceView';
 import { nanoid } from 'nanoid';
 
-export default class ExperienceOutput extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			id: nanoid(),
-			company: '',
-			position: '',
-			tasks: '',
-			startDate: '',
-			endDate: '',
-			completedForm: true,
-			buttonText: 'Submit',
-		};
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-	handleChange = (e) => {
-		this.setState({
-			[e.target.id]: e.target.value,
-		});
+export default function ExperienceOutput({ number, newJobs, removeItem }) {
+	const id = nanoid();
+	const [company, setCompany] = useState('');
+	const [position, setPosition] = useState('');
+	const [tasks, setTask] = useState('');
+	const [startDate, setStartDate] = useState('');
+	const [endDate, setEndDate] = useState('');
+	const [completedForm, setCompletedForm] = useState(true);
+	const [buttonText, setButtonText] = useState('submit');
+	const [allState, setAllState] = useState({
+		id: id,
+		company: company,
+		position: position,
+		tasks: tasks,
+		startDate: startDate,
+		endDate: endDate,
+	});
+
+	const handleChange = (e) => {
+		if (e.target.id === 'company') {
+			setCompany(e.target.value);
+		}
+		if (e.target.id === 'position') {
+			setPosition(e.target.value);
+		}
+		if (e.target.id === 'tasks') {
+			setTask(e.target.value);
+		}
+		if (e.target.id === 'startDate') {
+			setStartDate(e.target.value);
+		}
+		if (e.target.id === 'endDate') {
+			setEndDate(e.target.value);
+		}
 	};
-	handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.newJob(this.state);
-		this.displayCV();
-		if (this.state.completedForm) {
-			this.setState({
-				buttonText: 'Edit',
-			});
+		setAllState({ ...allState });
+		console.log(newJobs);
+		newJobs(allState);
+		displayCV();
+		if (completedForm) {
+			setButtonText('Edit');
 		} else {
-			this.setState({
-				buttonText: 'Submit',
-			});
+			setButtonText('Submit');
 		}
 	};
 
-	displayCV = () => {
-		const { completedForm } = this.state;
-		this.setState({
-			completedForm: !completedForm,
-		});
+	const displayCV = () => {
+		setCompletedForm(!completedForm);
 	};
 
-	deleteItem = (e) => {
-		this.props.removeItem(e.target.id, 'job');
+	const deleteItem = (e) => {
+		removeItem(e.target.id, 'job');
 	};
 
-	render() {
-		const { completedForm, company, position, tasks, startDate, endDate } = this.state;
-		const { number } = this.props;
-		return (
+	return (
+		<div>
 			<div>
-				<div>
-					{completedForm ? (
-						<Experience
-							number={number}
-							company={company}
-							position={position}
-							tasks={tasks}
-							startDate={startDate}
-							endDate={endDate}
-							handleChange={this.handleChange}
-							handleSubmit={this.handleSubmit}
-						/>
-					) : (
-						<ExperienceView
-							company={company}
-							position={position}
-							tasks={tasks}
-							startDate={startDate}
-							endDate={endDate}
-							deleteItem={this.deleteItem}
-						/>
-					)}
-				</div>
-				<div>
-					<button type="submit" className="btn btn-primary" onclick={this.handleSubmit}>
-						{this.state.buttonText}
-					</button>
-					<button type="button" id={number} onClick={this.deleteItem}>
-						Delete
-					</button>
-				</div>
+				{completedForm ? (
+					<Experience
+						number={number}
+						company={company}
+						position={position}
+						tasks={tasks}
+						startDate={startDate}
+						endDate={endDate}
+						handleChange={handleChange}
+						handleSubmit={handleSubmit}
+					/>
+				) : (
+					<ExperienceView
+						company={company}
+						position={position}
+						tasks={tasks}
+						startDate={startDate}
+						endDate={endDate}
+						deleteItem={deleteItem}
+					/>
+				)}
 			</div>
-		);
-	}
+			<div>
+				<button type="submit" className="btn btn-primary" onClick={handleSubmit}>
+					{buttonText}
+				</button>
+				<button type="button" id={number} onClick={deleteItem}>
+					Delete
+				</button>
+			</div>
+		</div>
+	);
 }

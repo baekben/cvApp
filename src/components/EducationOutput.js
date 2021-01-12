@@ -1,88 +1,83 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Education from './Education';
 import EducationView from './EducationView';
 import { nanoid } from 'nanoid';
 
-export default class EducationOutput extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			id: nanoid(),
-			school: '',
-			degree: '',
-			gradDate: '',
-			completedForm: true,
-			buttonText: 'Submit',
-		};
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-	handleChange = (e) => {
-		this.setState({
-			[e.target.id]: e.target.value,
-		});
-	};
+export default function EducationOutput({ number, newEducation, removeItem }) {
+	const id = nanoid();
+	const [school, setSchool] = useState('');
+	const [degree, setDegree] = useState('');
+	const [gradDate, setGradDate] = useState('');
+	const [completedForm, setCompletedForm] = useState(true);
+	const [buttonText, setButtonText] = useState('submit');
+	const [allState, setAllState] = useState({
+		id: id,
+		school: school,
+		degree: degree,
+		gradDate: gradDate,
+	});
 
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.props.newEducation(this.state);
-		this.displayCV();
-		if (this.state.completedForm) {
-			this.setState({
-				buttonText: 'Edit',
-			});
-		} else {
-			this.setState({
-				buttonText: 'Submit',
-			});
+	const handleChange = (e) => {
+		if (e.target.id === 'school') {
+			setSchool(e.target.value);
+		}
+		if (e.target.id === 'degree') {
+			setDegree(e.target.value);
+		}
+		if (e.target.id === 'gradDate') {
+			setGradDate(e.target.value);
 		}
 	};
 
-	displayCV = () => {
-		const { completedForm } = this.state;
-		this.setState({
-			completedForm: !completedForm,
-		});
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setAllState({ ...allState });
+		newEducation(allState);
+		displayCV();
+		if (completedForm) {
+			setButtonText('Edit');
+		} else {
+			setButtonText('Submit');
+		}
 	};
 
-	deleteItem = (e) => {
-		this.props.removeItem(e.target.id, 'edu');
+	const displayCV = () => {
+		setCompletedForm(!completedForm);
 	};
 
-	render() {
-		const { school, degree, gradDate, completedForm } = this.state;
-		const { number } = this.props;
+	const deleteItem = (e) => {
+		removeItem(e.target.id, 'edu');
+	};
 
-		return (
+	return (
+		<div>
 			<div>
-				<div>
-					{completedForm ? (
-						<Education
-							number={number}
-							school={school}
-							degree={degree}
-							gradDate={gradDate}
-							handleChange={this.handleChange}
-							handleSubmit={this.handleSubmit}
-							deleteItem={this.deleteItem}
-						/>
-					) : (
-						<EducationView
-							school={school}
-							degree={degree}
-							gradDate={gradDate}
-							deleteItem={this.deleteItem}
-						/>
-					)}
-				</div>
-
-				<button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
-					{this.state.buttonText}
-				</button>
-				<button type="button" id={number} onClick={this.deleteItem}>
-					Delete
-				</button>
+				{completedForm ? (
+					<Education
+						number={number}
+						school={school}
+						degree={degree}
+						gradDate={gradDate}
+						handleChange={handleChange}
+						handleSubmit={handleSubmit}
+						deleteItem={deleteItem}
+					/>
+				) : (
+					<EducationView
+						school={school}
+						degree={degree}
+						gradDate={gradDate}
+						deleteItem={deleteItem}
+					/>
+				)}
 			</div>
-		);
-	}
+
+			<button type="submit" className="btn btn-primary" onClick={handleSubmit}>
+				{buttonText}
+			</button>
+			<button type="button" id={number} onClick={deleteItem}>
+				Delete
+			</button>
+		</div>
+	);
 }
